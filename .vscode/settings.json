@@ -3,5 +3,5 @@
         "imshow",
         "numpy"
     ],
-    "python.pythonPath": "env/bin/python"
+    "python.pythonPath": "/Users/XuanSon/Desktop/FaceRecognition/env/bin/python3.6"
 }
