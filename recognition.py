@@ -8,9 +8,9 @@ video_capture = cv2.VideoCapture(0)
 
 known_face_dir = "known_images"
 unknown_face_dir = "unknown_images"
-tolerance = 0.5
+tolerance = 0.6
 frame_thickness = 3
-font_thickness = 2
+font_thickness = 3
 
 # Loading Known Faces
 print("loading known faces")
