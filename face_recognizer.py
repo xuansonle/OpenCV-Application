@@ -6,8 +6,8 @@ import numpy as np
 
 video_capture = cv2.VideoCapture(0)
 
-known_face_dir = "known_images"
-unknown_face_dir = "unknown_images"
+known_face_dir = "images/known_images"
+unknown_face_dir = "images/unknown_images"
 tolerance = 0.6
 frame_thickness = 3
 font_thickness = 3
