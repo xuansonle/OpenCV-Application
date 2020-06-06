@@ -3,7 +3,9 @@ from platform import release
 from cv2 import cv2
 
 cap = cv2.VideoCapture(0)
-cap = cv2.VideoCapture("images/motion/motion.mp4")
+
+# cap = cv2.VideoCapture("images/motion/motion.mp4")
+
 ret1, frame1 = cap.read()
 ret2, frame2 = cap.read()
 
@@ -28,7 +30,7 @@ while True:
             if cv2.contourArea(contour) < 700:
                 continue
             cv2.rectangle(frame1, (x,y), (x+w,y+h), (0,255,255), 2) #draw the box
-            cv2.putText(frame2, "Status: Movement", (10,20), cv2.FONT_HERSHEY_SIMPLEX, 2, (255,255,0), 2)
+            cv2.putText(frame1, "Status: Movement", (20,50), cv2.FONT_HERSHEY_SIMPLEX, 1.8, (255,255,0), 2)
             
         cv2.imshow("My Video", frame1)
     
