@@ -8,11 +8,10 @@ video_capture = cv2.VideoCapture(0)
 
 known_face_dir = "images/known_images"
 unknown_face_dir = "images/unknown_images"
-tolerance = 0.6
 frame_thickness = 3
 font_thickness = 3
 
-# Loading Known Faces
+# Loading Known Faces and save the encodings to a list
 print("loading known faces")
 known_face_encodings = []
 known_face_names = []
@@ -37,12 +36,12 @@ i = 0
 
 while True:
     
-    ret, frame = video_capture.read()
+    ret, frame = video_capture.read() #read the webcam
     
     small_frame = cv2.resize(frame, (0,0), fx=0.5, fy=0.5)
-    
+        
     rgb_small_frame = small_frame[:,:,::-1]
-    
+        
     if process_this_frame:
         
         face_locations = face_recognition.face_locations(rgb_small_frame)
@@ -52,15 +51,17 @@ while True:
         
         for face_encoding in face_encodings:
             
-            matches = face_recognition.compare_faces(known_face_encodings, face_encoding, tolerance=tolerance)
+            matches = face_recognition.compare_faces(known_face_encodings, face_encoding)
             
             face_distances = face_recognition.face_distance(known_face_encodings, face_encoding)
             best_match_index = np.argmin(face_distances)
             
             if matches[best_match_index]:
                 name = known_face_names[best_match_index]
-                face_names.append(name)
-                # now = datetime.now()
+            else:
+                name = "Unknown"
+                
+            face_names.append(name)
                 
     i+=1
     
@@ -83,10 +84,8 @@ while True:
         cv2.rectangle(frame, (left,top), (right,bottom), (0,0,255), 2)
         
         cv2.rectangle(frame, (left,bottom-35), (right,bottom), (0,0,255), cv2.FILLED)
-        
-        font = cv2.FONT_HERSHEY_DUPLEX
-        
-        cv2.putText(frame, name, (left+6,bottom-6), font, 1.0, (255,255,255), 1)
+                
+        cv2.putText(frame, name, (left+6,bottom-6), cv2.FONT_HERSHEY_DUPLEX, 1.0, (255,255,255), 1)
         
     cv2.imshow("Face Recognition",frame)
     
